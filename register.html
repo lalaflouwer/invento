@@ -1,0 +1,132 @@
+<html>
+<head>
+<title>Invento Engineering Pte Ltd</title>
+<link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<a href="index.html">
+<img src="logo.png" alt="logo">
+</a>
+<div id="login" >
+<a href="loginAdmin.php" style="color:black">Login As Staff</a> |
+<a href="loginCust.php" style="color:black">Login As Customer</a> |
+<a href="register.php" style="color:black"> Register</a>
+</div>
+
+<div class="nav">
+<ul>
+        <li class="about"><a href="#">About</a>
+          <ul>
+            <li><a href="mv.html">Mission & Vision</a></li>
+			<li><a href="history.html">History</a></li>
+
+          </ul>
+<li><a href="career.html">Career</a></li>
+<li><a href="productDisplay.php">Products</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="projectref.html">Projects References</a></li>
+<li><a href="contact.html">Contact Us</a></li>
+</ul>
+<br>
+
+<div id="container">
+<br>
+<h1>Register</h1><br><br><br><br><br>
+<table bgcolor="#8e1106" width="50%">
+	  <tr valign="top">
+	 <br />
+
+<?php
+if (isset($_POST['submit'])){
+	
+	// Load the required files
+	require_once 'dbconfig.php';
+	
+    //connect to database
+    $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD,DB_NAME);
+
+	//variable      $_POST is for the one given in the HTML.
+	$fname=$_POST["firstname"];
+    $lname=$_POST["lastname"];
+    $email=$_POST["email"];
+	$number=$_POST["number"];
+    $address=$_POST["address"];
+	$postal=$_POST["postal"];
+    $password=$_POST["password"];
+    $repassword=$_POST["repassword"];
+
+	//query statement
+	// INSERT into "table name" followed by "names in mysql"  VALUES "the variables given from above"
+    $sql="INSERT INTO `customer`(`cust_fname`, `cust_lname`, `cust_email`, `cust_number`, `cust_address`, `cust_postal`,`cust_password`,`cust_repassword`) VALUES ('$fname','$lname','$email',$number,'$address',$postal,'$password','$repassword')";
+
+	//carry out query
+	//echo $sql;
+	mysqli_query($dbc, $sql);
+	mysqli_close( $dbc ) ;
+}
+?>
+
+<form>
+
+ <th>
+  <td>
+  <br>First Name:<br>
+  <input type="text" name="firstname" maxlength="20" size="20" ><br>
+  Last Name:<br>
+  <input type="text" name="lastname" maxlength="20" size="20" ><br>
+  Email:<br>
+  <input type="email" name="email" maxlength="30" size="30" ><br>
+  Phone Number:<br>
+  <input type="number" name="number" maxlength="10" size="10" ><br>
+  Address:<br>
+  <input multiple="text" name="address" maxlength="40" size="30" style="height:50px; width:300px" rows="2" cols="25" > <br>
+  Postal Code:<br>
+  <input type="text" name="postal" maxlength="6" size="6" ><br><br>
+  </td>
+  </th>
+  
+  <th>
+  </th>
+  <th>
+  </th>
+  
+  <th>
+  <td>
+  <br>Username:<br>
+  <input type="text" name="username" required><br>
+  Password:<br>
+  <input type="password" name="password" required><br>
+  Re-Password:<br>
+  <input type="password" name="repassword" required><br><br>
+  <input type="reset" value="Reset">
+  <input type="submit" value="Submit"><br>
+  </td>
+  </th>
+
+</form>
+</td>
+</tr>
+
+</table>
+</div>
+
+<div id="main">
+</div>
+</div>
+<footer id="footer">
+<a href="https://www.facebook.com/Invento-Engineers-Pte-Ltd-160632617407656/" target="_blank">
+<center><img src="facebook.png" alt="facebook"
+stye="width:304px;height:228px;">
+</a>
+<p style="font-size:10px">ACMV . Electrical . System Integration . Plumbing . Fire Protection Security & Monitoring . Solar & Green Energy . Critical Environment Application . EMA Licensing
+<br>
+<br>
+Residential . Commercial . Industrial<br></p>
+
+<h2>Copyright &copy; 2005 - 2011 by Invento Engineers Pte Ltd. All Right Reserved.</h2>
+<h3>Associated with Invento Design Pte Ltd. Invento Engineering Sdn Bhd.</h3>
+</center>
+</footer>
+</body>
+</html>

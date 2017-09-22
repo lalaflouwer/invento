@@ -1,0 +1,248 @@
+	/*slide show*/
+	#table{
+		float:left;
+	}
+	#showContainer {
+	  /* Main wrapper for all images */
+	  width: 1100px;
+	  padding: 0;
+	  margin: 0 auto;
+	  overflow: hidden;
+	  float: left;
+	}
+		.navButton {
+		  /* Make buttons look nice */ 
+		  cursor: pointer;
+		  float:left;
+		  width: 25px;
+		  height: 22px;
+		  padding: 10px;
+		  margin-right: 570px;
+		  overflow: hidden;
+		  text-align: center;
+		  color: white;
+		  font-weight: bold;
+		  font-size: 18px;
+		  background: #000000;
+		  opacity: 0.65;
+		  user-select: none;
+		}
+		.navButton:hover {
+		  opacity: 1;
+		}
+		.caption {
+		  float: bottom-left;
+		}
+		.imageContainer:not(:first-child) {
+		  /* Hide all images except the first */
+		  display: none;
+		  float: left;
+		}
+	/*slide show*/
+	
+body {
+  margin: 0;
+  padding: 0;
+}
+
+	#add td {
+		color:black;
+		min-height:100%;
+		width: 100%;
+		/*top, right, bottm, left*/
+		margin:0 0 20px 0px;
+		padding:0 0 20px 0px;	
+		line-height:15px;
+	}
+	
+		#form td {
+		color:black;
+		min-height:100%;
+		/*top, right, bottm, left*/
+		margin:0 0px 20px 50px;
+		padding:7px 0px 20px 40px;	
+		line-height:15px;
+	}
+	
+		#display td{
+		color:black;
+		min-height:100%;
+		width: 100%;
+		/*top, right, bottm, left*/
+		margin:0 0px 20px 0px;
+		padding:0 100px 20px 0px;	
+	}
+	
+.nav ul {
+  list-style: none;
+  background-color: #8e1106;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.nav li {
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-size: 16px;
+  line-height: 40px;
+  text-align: center;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  padding-left: 15px;
+  border-bottom: 1px solid #888;
+  transition: .3s background-color;
+}
+
+.nav a:hover {
+  background-color:#e6e6e6; 
+  color:#8e1106;
+}
+
+/* Sub Menus */
+.nav li li {
+  font-size: 16px;
+}
+
+/*******************************************
+   Style menu for larger screens
+
+   Using 650px (130px each * 5 items), but ems
+   or other values could be used depending on other factors
+********************************************/
+
+@media screen and (min-width: 650px) {
+  .nav li {
+    width: 200px;
+    border-bottom: none;
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    display: inline-block;
+    margin-right: -4px;
+  }
+
+  .nav a {
+    border-bottom: none;
+  }
+
+  .nav > ul > li {
+    text-align: center;
+  }
+
+  .nav > ul > li > a {
+    padding-left: 0;
+  }
+
+  /* Sub Menus */
+  .nav li ul {
+    position: absolute;
+    display: none;
+    width: inherit;
+  }
+
+  .nav li:hover ul {
+    display: block;
+  }
+
+  .nav li ul li {
+    display: block;
+  }
+}
+
+
+html,body{
+	height:100%;
+	}
+	
+	
+	#container{
+		min-height:100%;
+		width: 100%;
+		/*top, right, bottm, left*/
+		margin:0 0 100px 30px;
+		padding:0 0 0px 100px;	
+		line-height:20px;
+	}
+	
+		#image{
+		min-height:100%;
+		width: 100%;
+		}
+		
+		#content{
+		min-height:100%;
+		width: 100%;
+	}
+	
+	#main{
+		overflow: auto;
+		padding-bottom: 60px;
+	}
+
+	#footer{
+		background-color:white;
+		position:relative;
+		height:150px;
+		margin-top:-150px;  
+		clear: both;
+		color:#666666;
+		font-size:8px;
+	}
+	#login{
+		float:right;
+		height:auto;
+		width:auto;
+		position:absolute;
+		top: 50pt;
+		right: 20pt;
+		padding: 10px 15px;
+		font-size: 12px;
+	}
+		
+td{
+	color:white;
+
+}
+a{
+	color:white;
+}
+
+h1{
+	color:#000000;
+	font-size:25px;
+	float:left;
+}
+	
+h2{
+
+	color:#666666;
+	font-size:10px;
+}
+h3{
+	
+	color:#ec0a0a;
+	font-size:12px;	
+}
+
+
+	body{
+
+	background:#e6e6e6;
+	font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 8px;	
+	color: #8e1106;
+	
+}
+
+fieldset
+{
+	width :25%;
+}
