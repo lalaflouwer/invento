@@ -21,10 +21,17 @@
 <a href="register.php" style="color:black"> Register</a>-->
 </div>
 <script>
-document.querySelector('[name="theform"]').addEventListener('submit', function(e) {
+var el = document.getElementById("theform");
+if(el)
+{
+  el.addEventListener("click", fireatwill);
+}
+//document.getElementById("theform").addEventListener("click", fireatwill);
+function fireatwill(event)
+{
   document.getElementById('hidden_emp_fullname').value = document.getElementById('emp_fullname').innerHTML;
   console.log(document.getElementById('hidden_emp_fullname').value);
-})
+}
 </script>
 </div><div class="nav">
 <ul>
@@ -100,7 +107,7 @@ document.querySelector('[name="theform"]').addEventListener('submit', function(e
                       <!--<button name="doModify">Update</button>-->
 
 <!--                        <button id="btnSend" name="btnSend" type="submit">Update</button>-->
-                        <input type="submit" id="btnSend" name="btnSend" value="Update">
+                        <input type="submit" id="submit" name="submit" value="Update">
                       </form>
                     </td>
 <?php

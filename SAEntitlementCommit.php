@@ -61,7 +61,7 @@
     //connect to database
     //$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD,DB_NAME);
 
-    if (isset($_POST['btnSend']))
+    if (isset($_POST['submit']))
     {
         $getmsg = $_POST['hidden_emp_fullname'];
         echo $getmsg;
