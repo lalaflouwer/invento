@@ -39,36 +39,38 @@
 			<li><a href="toolsfee.php">Add Tool Fee</a></li>
 			<li><a href="displayMed.php">View Medical Fee</a></li>
 			<li><a href="displayTool.php">View Tool Fee</a></li>
+			<li><a href="SAentitlement.php">Set Medical Entitlement</a></li>
+			<li><a href="SATools.php">Set Tool Entitlement</a></li>
           </ul>
 	<li class="leaves"><a href="http://www.justlogin.com" target="_blank">Leaves</a>
           <!--<ul>
             <li><a href="#">Manage</a></li>
-          </ul>-->	  
+          </ul>-->
 	<li class="career"><a href="careerDisplay.php">Career Applications</a>
 </ul>
 <br>
 </div>
 
- 
+
 <html>
-<head>    
+<head>
 
 </head>
 <body>
 <div id="container">
 <h1>Profile Details</h1><br><br><br>
-<?php	
+<?php
     //connect to database
     $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD,DB_NAME);
 
 	$sql= "(SELECT * FROM employees where emp_email='$_SESSION[email]')";
-			
+
 		$result = mysqli_query($dbc, $sql);
-		
-        //while($row = mysql_fetch_array($result)) { 
-		// mysql_fetch_array is deprecated, we need to use mysqli_fetch_array 
-        while($row = mysqli_fetch_array($result)) {   		
-		
+
+        //while($row = mysql_fetch_array($result)) {
+		// mysql_fetch_array is deprecated, we need to use mysqli_fetch_array
+        while($row = mysqli_fetch_array($result)) {
+
 					$id = $row['id'];
 					$emp_id = $row['emp_id'];
 					$emp_fullname = $row['emp_fullname'];
@@ -115,18 +117,18 @@
 			<td bgcolor='#8e1106' style=color:#FFFFFF>Full Name</td> <td bgcolor='#ffffff' style=color:#000000>".$emp_fullname."</td>
 			<td bgcolor='#8e1106' style=color:#FFFFFF>Nationality</td> <td bgcolor='#ffffff' style=color:#000000>".$emp_nationality."</td>
 			</tr>
-			
+
 			<tr>
 			<td bgcolor='#8e1106' style=color:#FFFFFF>NRIC</td> <td bgcolor='#ffffff' style=color:#000000>".$emp_nric."</td>
 			<td bgcolor='#8e1106' style=color:#FFFFFF>FIN</td> <td bgcolor='#ffffff' style=color:#000000>".$emp_fin ."</td>
 			</tr>
-			
+
 			<tr>
 			<td bgcolor='#8e1106' style=color:#FFFFFF>Date Of Birth</td> <td bgcolor='#ffffff' style=color:#000000>".$emp_dob."</td>
 			<td bgcolor='#8e1106' style=color:#FFFFFF>WP / SP Expiry Date </td> <td bgcolor='#ffffff' style=color:#000000>".$emp_permitNo ."</td>
 			</tr>
-			
-			<tr> 
+
+			<tr>
 			<td bgcolor='#8e1106' style=color:#FFFFFF>Race</td> <td bgcolor='#ffffff' style=color:#000000>".$emp_race ."</td>
 			<td bgcolor='#8e1106' style=color:#FFFFFF>WP / SP Expiry</td> <td bgcolor='#ffffff' style=color:#000000>".$emp_permitExpiry ."</td>
 			</tr>
@@ -135,35 +137,35 @@
 			<td bgcolor='#8e1106' style=color:#FFFFFF>Home Number</td> <td bgcolor='#ffffff' style=color:#000000>".$emp_homeContact."</td>
 			<td bgcolor='#8e1106' style=color:#FFFFFF>Passport No. </td> <td bgcolor='#ffffff' style=color:#000000>".$emp_passportNo ."</td>
 			</tr>
-			
+
 			<tr>
 			<td bgcolor='#8e1106' style=color:#FFFFFF>Contact Number</td> <td bgcolor='#ffffff' style=color:#000000>".$emp_contact."</td>
 			<td bgcolor='#8e1106' style=color:#FFFFFF>Passport Expiry</td> <td bgcolor='#ffffff' style=color:#000000>".$emp_passportExpiry ."</td>
 			</tr>
-			
+
 			<tr>
 			<td bgcolor='#8e1106' style=color:#FFFFFF>Email</td> <td bgcolor='#ffffff' style=color:#000000>".$emp_email."</td>
 			<td bgcolor='#8e1106' style=color:#FFFFFF>Foreign Address</td> <td bgcolor='#ffffff' style=color:#000000>".$emp_faddress."</td>
 			</tr>
-			
+
 						<tr>
 			<td bgcolor='#8e1106' style=color:#FFFFFF>Residential Address</td> <td bgcolor='#ffffff' style=color:#000000>".$emp_address."</td>
 			<td bgcolor='#8e1106' style=color:#FFFFFF>Department</td> <td bgcolor='#ffffff' style=color:#000000>".$emp_dept."</td>
 			</tr>
-			
+
 			<tr>
 			<td bgcolor='#8e1106' style=color:#FFFFFF>Postal Code</td> <td bgcolor='#ffffff' style=color:#000000>".$emp_postal."</td>
 			<td bgcolor='#8e1106' style=color:#FFFFFF>Designation</td> <td bgcolor='#ffffff' style=color:#000000>".$emp_designation."</td>
 			</tr>
-			
+
 			<tr>
 			<td bgcolor='#8e1106' style=color:#FFFFFF>Resident Status</td> <td bgcolor='#ffffff' style=color:#000000>".$emp_resid."</td>
 			<td bgcolor='#8e1106' style=color:#FFFFFF>Joined Date</td> <td bgcolor='#ffffff' style=color:#000000>".$emp_joined."</td>
 			</tr>";
-			}     
-			echo "</table>";	
-			echo "</br>";	
-			echo "</br>";					
+			}
+			echo "</table>";
+			echo "</br>";
+			echo "</br>";
 		//carry out query
 	//echo $sql;
 	mysqli_query($dbc, $sql);

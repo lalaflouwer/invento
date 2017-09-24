@@ -40,11 +40,13 @@
 			<li><a href="toolsfee.php">Add Tool Fee</a></li>
 			<li><a href="displayMed.php">View Medical Fee</a></li>
 			<li><a href="displayTool.php">View Tool Fee</a></li>
+			<li><a href="SAentitlement.php">Set Medical Entitlement</a></li>
+			<li><a href="SATools.php">Set Tool Entitlement</a></li>
           </ul>
 	<li class="leaves"><a href="http://www.justlogin.com" target="_blank">Leaves</a>
           <!--<ul>
             <li><a href="#">Manage</a></li>
-          </ul>-->	  
+          </ul>-->
 	<li class="career"><a href="careerDisplay.php">Career Applications</a>
 </ul>
 <br>
@@ -54,21 +56,21 @@
 <?php
     //connect to database
     $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD,DB_NAME);
-	
+
 	$sql= "SELECT * FROM employees ORDER BY `emp_fullname`";
-	
+
 	echo " <table cellpadding='4' bgcolor='#000000' style=color:#ffffff width='50%'>
 			<tr bgcolor='#8e1106'>
 			<th>Employee ID</th>
             <th>Full Name</th>
 			<th>View Details</th>
 			</tr>";
-			
+
 		$result = mysqli_query($dbc, $sql);
-		
-        //while($row = mysql_fetch_array($result)) { 
-		// mysql_fetch_array is deprecated, we need to use mysqli_fetch_array 
-        while($row = mysqli_fetch_array($result)) {     
+
+        //while($row = mysql_fetch_array($result)) {
+		// mysql_fetch_array is deprecated, we need to use mysqli_fetch_array
+        while($row = mysqli_fetch_array($result)) {
 ?>
 
             <tr>
@@ -78,12 +80,12 @@
 			<td align='center' style='padding: 10px 0px 0px 0px;'  bgcolor='#ffffff' style=color:#000000 width='5%'>
 			<form method="post" action="displayMed2.php?id=<?php echo $row["emp_id"];?>">
 			<input type="submit" value="View" id="view_btn"></form></td>
-			
-<?php			
+
+<?php
 
             echo "</tr>";
-			}     
-			echo "</table>";		
+			}
+			echo "</table>";
 		//carry out query
 		//echo $sql;
 		mysqli_query($dbc, $sql);
@@ -102,12 +104,12 @@
 		$joined = null;
 		$pass = null;
 		$image = null;
-	
+
      if (isset($_POST['emp_id'])){
-	
+
       $id = $_POST['emp_id'];
 	  $sql = "DELETE FROM `employees` WHERE `emp_id` = '$id'";
-      
+
       $result = mysqli_query($dbc, $sql);
             if (mysqli_query($dbc,$sql)){
                 echo "Employee deleted";
@@ -118,7 +120,7 @@
 			   echo "<meta http-equiv='refresh' content='0;url=displayMed.php'>";
             }
             ?>
-            
+
             <script type="text/javascript">
             function validate()
             {
@@ -141,7 +143,7 @@
 
                 </script>
 </br>
-           
+
 			<br>
 </div>
 

@@ -40,32 +40,34 @@
 			<li><a href="toolsfee.php">Add Tool Fee</a></li>
 			<li><a href="displayMed.php">View Medical Fee</a></li>
 			<li><a href="displayTool.php">View Tool Fee</a></li>
+			<li><a href="SAentitlement.php">Set Medical Entitlement</a></li>
+			<li><a href="SATools.php">Set Tool Entitlement</a></li>
           </ul>
 	<li class="leaves"><a href="http://www.justlogin.com" target="_blank">Leaves</a>
           <!--<ul>
             <li><a href="#">Manage</a></li>
-          </ul>-->	  
+          </ul>-->
 	<li class="career"><a href="careerDisplay.php">Career Applications</a>
 </ul>
 <br>
 </div>
 <div id="container">
- 
+
 <html>
-<head>    
+<head>
     <title>Homepage</title>
 </head>
- 
+
 <body>
     <a href="addStaff.php">Add New Products</a><br/><br/>
-	
+
 <?php
     //connect to database
     $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD,DB_NAME);
-	
+
 	$sql= "(SELECT * FROM product)";
 
-	
+
 	echo " <table bgcolor='#8e1106' border= 1 width='70%'>
 			<tr bgcolor='#FFFFFF'>
 			<th>Staff ID</th>
@@ -82,34 +84,34 @@
 			<th>Joined Date</th>
 			<th>Password</th>
 			</tr>";
-			
+
 		$result = mysqli_query($dbc, $sql);
-		
+
 		$sql= "(SELECT * FROM staff)";
-		
-        //while($row = mysql_fetch_array($result)) { 
-		// mysql_fetch_array is deprecated, we need to use mysqli_fetch_array 
-        while($row = mysqli_fetch_array($result)) {         
+
+        //while($row = mysql_fetch_array($result)) {
+		// mysql_fetch_array is deprecated, we need to use mysqli_fetch_array
+        while($row = mysqli_fetch_array($result)) {
             echo "<tr>";
 			echo "
-			<td>".$row[0]."</td> <td>".$row[1]."</td> <td>".$row[2]."</td> <td>".$row[4]."</td> 
-			<td>".$row[5]."</td> <td>".$row[6]."</td> <td>".$row[7]."</td> <td>".$row[8]."</td> <td>".$row[9]."</td> 
+			<td>".$row[0]."</td> <td>".$row[1]."</td> <td>".$row[2]."</td> <td>".$row[4]."</td>
+			<td>".$row[5]."</td> <td>".$row[6]."</td> <td>".$row[7]."</td> <td>".$row[8]."</td> <td>".$row[9]."</td>
 			<td>".$row[10]."</td> <td>".$row[11]."</td> <td>".$row[12]."</td> <td>".$row[3]."</td>";
  			?>
-			
+
             <td><a href=\"edit.php?id= <?php $row[0] ?>\">Edit</a> | <a href=\"delete.php?id= <?php $row[0]?>\" onClick=\"return confirm('Are you sure you want to delete?')\">Delete</a></td>
 
-<?php			
+<?php
             echo "</tr>";
-			}     
-			echo "</table>";		
+			}
+			echo "</table>";
 		//carry out query
 	//echo $sql;
 	mysqli_query($dbc, $sql);
 
 	mysqli_close( $dbc ) ;
 ?>
-	
+
 </body>
 </html>
 </div>

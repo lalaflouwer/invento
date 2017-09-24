@@ -1,7 +1,7 @@
 <?php
 	// Load the required files
 	require_once 'dbconfig.php';
-?>	 
+?>
 <html>
 <head>
 <title>Invento Engineering Pte Ltd</title>
@@ -18,36 +18,36 @@
             document.myForm.empid.focus() ;
             return false;
          }
-		 
-		  
+
+
          if( document.myForm.name.value == "" )
          {
             alert( "Please enter Full Name!" );
             document.myForm.name.focus() ;
             return false;
          }
-		 
-		 
+
+
 		 if( document.myForm.entitlement.value == "")
           {
             alert( "Please enter Entitlement!" );
             document.myForm.entitlement.focus() ;
             return false;
-         }	
-		 
+         }
+
 		 if(document.myForm.date.value == "")
           {
             alert( "Please enter Date" );
             document.myForm.date.focus() ;
             return false;
          }
-		 
+
 		 if( document.myForm.clinic.value == "")
           {
             alert( "Please enter Clinic!" );
             document.myForm.clinic.focus() ;
             return false;
-         }		
+         }
 
 		 if( document.myForm.receiptno.value == "")
           {
@@ -92,7 +92,7 @@
 <?php
 
 	ini_set('display_errors', 1); ini_set('log_errors',1); error_reporting(E_ALL); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
- 
+
     //connect to database
     $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD,DB_NAME);
 	//echo $_SESSION['email'];
@@ -110,15 +110,15 @@
 	$claimed = "";
 	$balance = "";
 
-	
+
 function getEmployee()
-{	
+{
 	$employee = array();
 	$employee[0] = $_POST['empid'];
     $employee[1] = $_POST['name'];
 	    return $employee;
 }
-	
+
 // get values from the form
 function getPosts(){
 $posts = array();
@@ -133,7 +133,7 @@ $posts = array();
 	$posts[8] = $_POST['paid'];
 	$posts[9] = $_POST['gst'];
 	$posts[10] = $_POST['claimed'];
-	$posts[11] = $_POST['balance'];							 
+	$posts[11] = $_POST['balance'];
     return $posts;
 }
 
@@ -142,17 +142,17 @@ $posts = array();
 if(isset($_POST['search']))
 {
     $employee = getEmployee();
-    
+
     $search_Query = "SELECT * FROM employees WHERE emp_id = '$employee[0]'";
-    
+
     $search_Result = mysqli_query($dbc, $search_Query);
-    
+
     if($search_Result)
     {
         if(mysqli_num_rows($search_Result))
         {
             while($row = mysqli_fetch_array($search_Result))
-            {				
+            {
 				$empid=$row['emp_id'];
 				$name=$row['emp_fullname'];
             }
@@ -181,13 +181,13 @@ $insert_Result = mysqli_query($dbc, $insert_Query);
             if(mysqli_affected_rows($dbc) > 0)
             {
                 echo 'Data Inserted';
-				
+
             }else{
                 echo 'Data Not Inserted';
             }
-			
+
 		header("Location: displaytool.php");//redirect to claimDisplay.php page
-		mysqli_close( $dbc ) ;		
+		mysqli_close( $dbc ) ;
 		}
 }
 ?>
@@ -221,11 +221,13 @@ $insert_Result = mysqli_query($dbc, $insert_Query);
 			<li><a href="toolsfee.php">Add Tool Fee</a></li>
 			<li><a href="displayMed.php">View Medical Fee</a></li>
 			<li><a href="displayTool.php">View Tool Fee</a></li>
+			<li><a href="SAentitlement.php">Set Medical Entitlement</a></li>
+			<li><a href="SATools.php">Set Tool Entitlement</a></li>
           </ul>
 	<li class="leaves"><a href="http://www.justlogin.com" target="_blank">Leaves</a>
           <!--<ul>
             <li><a href="#">Manage</a></li>
-          </ul>-->	  
+          </ul>-->
 	<li class="career"><a href="careerDisplay.php">Career Applications</a>
 </ul>
 <br>
@@ -235,15 +237,15 @@ $insert_Result = mysqli_query($dbc, $insert_Query);
       <table border=0 width='82%'>
 			<tr><br><br>
 			<td>Employee ID</td><td>:</td><td><input type="text" name="empid" maxlength="5" pattern="[A-Z]{3,5}" required title="Min.3, Max. 5 Capitial Letters ONLY!" value="<?php echo $empid;?>" ><td><input type="submit" name="search" value="Find"></td></td>
-		
+
 			<td>Item Description</td><td>:</td><td><input type="text"  name="itemdesc"></td>
 			</tr>
-			
+
 			<tr>
 			<td>Full Name</td><td>:</td><td><input type="text" name="name" value="<?php echo $name;?>"></td>
 			<td></td>
 			<td>Amount Paid</td><td>:</td><td><input type="text" name="paid"></td>
-				
+
 			</tr>
 
 			<tr>
@@ -251,7 +253,7 @@ $insert_Result = mysqli_query($dbc, $insert_Query);
 			<td></td>
             <td>GST</td><td>:</td><td><input type="text" name="gst" >
 			</tr>
-			
+
 			<tr>
 			<td>Balance Fee</td><td>:</td><td><input type="text" name="prevbal"></td>
 			<td></td>
@@ -261,21 +263,21 @@ $insert_Result = mysqli_query($dbc, $insert_Query);
 			<tr>
 		    <td>Date</td><td>:</td><td><input type="text" name="date" placeholder="DD-MM-YYYY"></td>
 			<td></td>
-			<td>Balance</td><td>:</td><td><input type="text" name="balance" >	
-			</tr>	
-			
-			<tr>
-			<td>Supplier</td><td>:</td><td><input type="text" name="supplier"></td>			
+			<td>Balance</td><td>:</td><td><input type="text" name="balance" >
 			</tr>
-			<tr>	
-			
+
+			<tr>
+			<td>Supplier</td><td>:</td><td><input type="text" name="supplier"></td>
+			</tr>
+			<tr>
+
 			</tr>
 			<tr>
 			<td>Tax Cash Sale / Invoice</td><td>:</td><td><input type="text" name="invoice" >
 			<td></td>
 			<td></td><td></td><td></td><td></td>
 			<td align="right"><input type="submit" name="submit" value="Add"></td>
-			</tr>	
+			</tr>
 
 			<tr>
 			<td><br><br><br></td>
