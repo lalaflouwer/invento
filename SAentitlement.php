@@ -21,16 +21,15 @@
 <a href="register.php" style="color:black"> Register</a>-->
 </div>
 <script>
-var el = document.getElementById("theform");
-if(el)
-{
-  el.addEventListener("click", fireatwill);
-}
+
 //document.getElementById("theform").addEventListener("click", fireatwill);
-function fireatwill(event)
+function fireatwill()
 {
   document.getElementById('hidden_emp_fullname').value = document.getElementById('emp_fullname').innerHTML;
-  console.log(document.getElementById('hidden_emp_fullname').value);
+  document.getElementById('hidden_med_entitlement').value = document.getElementById('med_entitlement').innerHTML;
+  document.getElementById('hidden_med_leave').value = document.getElementById('med_leave').innerHTML;
+  document.getElementById('hidden_hosp_leave').value = document.getElementById('hosp_leave').innerHTML;
+
 }
 </script>
 </div><div class="nav">
@@ -94,20 +93,19 @@ function fireatwill(event)
 ?>
       <form name="theform" action="SAEntitlementCommit.php" method="POST">
 	          <tr>
-				            <td id='emp_fullname' contentEditable align='center' bgcolor='#ffffff' style=color:#000000 width='4%'><?php echo $row["emp_fullname"];?></td>
-                    <input type="hidden" id='hidden_emp_fullname' name='hidden_emp_fullname'>
+				            <td id="emp_fullname" contentEditable align='center' bgcolor='#ffffff' style=color:#000000 width='4%'><?php echo $row["emp_fullname"];?></td>
+                    <input type="hidden" id="hidden_emp_fullname" name='hidden_emp_fullname'>
 			              <td id='med_entitlement' contentEditable align='center' bgcolor='#ffffff' style=color:#000000 width='4%'><?php echo $row["med_entitlement"];?></td>
                     <input type="hidden" id='hidden_med_entitlement' name='hidden_med_entitlement'>
                   	<td id='med_leave' contentEditable align='center' bgcolor='#ffffff' style=color:#000000 width='6%'><?php echo $row["med_leave"];?></td>
                     <input type="hidden" id='hidden_med_leave' name='hidden_med_leave'>
                   	<td id='hosp_leave' contentEditable align='center' bgcolor='#ffffff' style=color:#000000 width='6%'><?php echo $row["hosp_leave"];?></td>
                     <input type="hidden" id='hidden_hosp_leave' name='hidden_hosp_leave'>
-
 			              <td width='5%'bgcolor='#ffffff' style=color:#000000 align='center'>
                       <!--<button name="doModify">Update</button>-->
 
-<!--                        <button id="btnSend" name="btnSend" type="submit">Update</button>-->
-                        <input type="submit" id="submit" name="submit" value="Update">
+                        <button id="submit" name="submit" type="submit" onclick="fireatwill()">Update</button>
+                        <!--<input type="submit" id="submit" name="submit" value="Update">-->
                       </form>
                     </td>
 <?php
@@ -117,7 +115,6 @@ function fireatwill(event)
 			echo "</table>";
 			echo "</br></br>";
 ?>
-
 
             </body>
     </html>

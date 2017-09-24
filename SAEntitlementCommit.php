@@ -55,17 +55,23 @@
 <div id="container">
 <br>
 <h1>Entitlement</h1><br><br><br>
-
            <?php
-
     //connect to database
-    //$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD,DB_NAME);
+    $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD,DB_NAME);
+    $hidden_med_entitlement = (float)$_POST['hidden_med_entitlement'];
+    $hidden_med_leave = (int)$_POST['hidden_med_leave'];
+    $hidden_hosp_leave = (int)$_POST['hidden_hosp_leave'];
+    $hidden_emp_fullname = $_POST['hidden_emp_fullname'];
 
-    if (isset($_POST['submit']))
-    {
-        $getmsg = $_POST['hidden_emp_fullname'];
-        echo $getmsg;
-    }
+    $sql= "UPDATE employees set med_entitlement ='$hidden_med_entitlement', med_leave='$hidden_med_leave', hosp_leave='$hidden_hosp_leave' where emp_fullname='$hidden_emp_fullname'";
+    //$sql= "(SELECT * FROM employees where emp_email='$_SESSION[email]')";
+
+      $result = mysqli_query($dbc, $sql);
+      mysqli_close( $dbc ) ;
+      if($result)
+      {
+        echo $hidden_emp_fullname . ' records are updated.';
+      }
 ?>
 
             </body>
