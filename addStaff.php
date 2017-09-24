@@ -19,36 +19,36 @@
             document.myForm.empid.focus() ;
             return false;
          }
-		 
-		  
+
+
          if( document.myForm.name.value == "" )
          {
             alert( "Please enter Full Name!" );
             document.myForm.name.focus() ;
             return false;
          }
-		 
-		 
+
+
 		 if( document.myForm.email.value == "")
           {
             alert( "Please enter Email!" );
             document.myForm.email.focus() ;
             return false;
-         }	
-		 
+         }
+
 		 if(document.myForm.email.value.indexOf('@') == -1 || document.myForm.email.value.indexOf('.') == -1)
           {
             alert( "Invalid Email, check if the '@' and '.'s in the email address" );
             document.myForm.email.focus() ;
             return false;
          }
-		 
+
 		 if( document.myForm.password.value == "")
           {
             alert( "Please enter Password!" );
             document.myForm.password.focus() ;
             return false;
-         }		
+         }
 /*
 		 if( document.myForm.repassword.value == "")
           {
@@ -56,31 +56,31 @@
             document.myForm.repassword.focus() ;
             return false;
          }
-		 
+
 		 //to check whether both password and re-password matches.
 		 if( document.myForm.repassword.value != document.myForm.password.value)
           {
             alert( "Password does not match!" );
             document.myForm.repassword.focus() ;
             return false;
-         }					 
+         }
          return( true );
 		 */
-		 
+
 		 if( document.myForm.contact.value == "")
           {
             alert( "Please enter Contact!" );
             document.myForm.contact.focus() ;
             return false;
-         }		 
-		 		 
+         }
+
 		 if( document.myForm.nric.value == "")
           {
             alert( "Please enter NRIC!" );
             document.myForm.nric.focus() ;
             return false;
 		  }
-		 
+
 		 if( document.myForm.address.value == "")
           {
             alert( "Please enter Address!" );
@@ -93,7 +93,7 @@
             alert( "Please enter Postal Code!" );
             document.myForm.postal.focus() ;
             return false;
-         }	
+         }
 
 
       }
@@ -112,8 +112,8 @@
 	$permitNo ="";
 	$passportExpiry="";
 	$passportNo ="";
-	$homeContact ="";	
-	
+	$homeContact ="";
+
 	//variable      $_POST is for the one given in the HTML.
 	//$id=$_POST['id'];
 	$empid = $_POST['empid'];
@@ -143,10 +143,10 @@
 	//$fpostal = $_POST['fpostal'];
 	$designation = $_POST['designation'];
 	//$emp_status = $_POST['status']; needs to be by default active.
-	
-	
+
+
 	//$password = password_hash($password, PASSWORD_BCRYPT);
-	
+
 		//to check if email and employee Id is used/taken already.
 		$sql= "SELECT * FROM employees where emp_email = '$email'|| emp_id = '$empid' || emp_nric = '$nric'";
 		$result = mysqli_query($dbc, $sql);
@@ -158,23 +158,23 @@
 		}
 
 		else{
-			
+
 	//Upload Image
 		$image = basename($_FILES['image']['name']);
-		
+
 	//INSERT into "table name" followed by "names in mysql"  VALUES "the variables given from above"
 		$sql="INSERT INTO `employees` (`id`, `emp_id`, `emp_fullname`, `emp_email`, `emp_pass`, `emp_contact`, `emp_homeContact`, `emp_dob`, `emp_nationality`, `emp_race`, `emp_nric`, `emp_fin`, `emp_permitNo`, `emp_permitExpiry`, `emp_passportNo`, `emp_passportExpiry`, `emp_resid`, `emp_address`, `emp_postal`, `emp_faddress`, `emp_dept`, `emp_designation`, `emp_type`, `emp_joined`, `emp_status`, `emp_img`) VALUES (NULL, '$empid', '$name', '$email', '$password', '$contact', '$homeContact', '$dob', '$nationality', '$race', '$nric', '$fin', '$permitNo', '$permitExpiry', '$passportNo', '$passportExpiry' , '$resid', '$address', '$postal', '$faddress', '$dept', '$designation', 'Employee', '$join', 'Active', '$image')";
-			
+
 		mysqli_query($dbc, $sql);
-		
+
 		if (move_uploaded_file($_FILES['image']['tmp_name'], $image)) {
 			$msg = "Image uploaded successfully";
 		}else{
 			$msg = "Failed to upload image";
 		}
-		
+
 		header("Location: adminDisplay.php");//redirect to addDisplay.php page
-	
+
 	mysqli_close( $dbc ) ;
 		}
 }
@@ -212,11 +212,13 @@
 			<li><a href="toolsfee.php">Add Tool Fee</a></li>
 			<li><a href="displayMed.php">View Medical Fee</a></li>
 			<li><a href="displayTool.php">View Tool Fee</a></li>
+			<li><a href="SAentitlement.php">Set Medical Entitlement</a></li>
+			<li><a href="SATools.php">Set Tool Entitlement</a></li>
           </ul>
 	<li class="leaves"><a href="http://www.justlogin.com" target="_blank">Leaves</a>
           <!--<ul>
             <li><a href="#">Manage</a></li>
-          </ul>-->	  
+          </ul>-->
 	<li class="career"><a href="careerDisplay.php">Career Applications</a>
 </ul>
 <br>
@@ -225,28 +227,28 @@
 <div id="form">
 <form action="" method="post" name="myForm" onsubmit="return(validate());" enctype="multipart/form-data" >
  <!-- Disable/Enable fields when user is Singaporean.-->
-				<script type="text/javascript"> 
-					function disablefields(){ 
-					if (document.getElementById('checkbox').checked == 1){ 
-					document.getElementById('permitNo').disabled='disabled'; 
-					document.getElementById('permitExpiry').disabled='disabled'; 
-					document.getElementById('fin').disabled='disabled'; 
-					document.getElementById('faddress').disabled='disabled'; 
-					document.getElementById('fpostal').disabled='disabled'; 
-					}else{ 
-					document.getElementById('permitNo').disabled=''; 
-					document.getElementById('permitExpiry').disabled=''; 
+				<script type="text/javascript">
+					function disablefields(){
+					if (document.getElementById('checkbox').checked == 1){
+					document.getElementById('permitNo').disabled='disabled';
+					document.getElementById('permitExpiry').disabled='disabled';
+					document.getElementById('fin').disabled='disabled';
+					document.getElementById('faddress').disabled='disabled';
+					document.getElementById('fpostal').disabled='disabled';
+					}else{
+					document.getElementById('permitNo').disabled='';
+					document.getElementById('permitExpiry').disabled='';
 					document.getElementById('fin').disabled='';
-					document.getElementById('faddress').disabled=''; 
-					document.getElementById('fpostal').disabled=''; 					
-					} 
-					} 
-				</script> 
+					document.getElementById('faddress').disabled='';
+					document.getElementById('fpostal').disabled='';
+					}
+					}
+				</script>
       <table border=0 width='100%'>
 			<tr><br><br>
 			<td>Employee ID</td><td>:</td><td><input type="text" name="empid" maxlength="5" pattern="[A-Z]{3,5}" required title="Min.3, Max. 5 Capitial Letters ONLY!" ></td>
 			<td>Password</td><td>:</td><td><input type="text" name="password" required pattern="[a-zA-Z0-9]+"></td>
-			
+
 			</tr>
 			<tr>
 			<td>Full Name</td><td>:</td><td><input type="text" name="name"></td>
@@ -507,7 +509,7 @@
 			<td>FIN No.</td><td>:</td><td><input id="fin" type="text" name="fin" disabled="disabled">
 			<input type="hidden" name="fin">
 			</tr>
-			
+
 			<tr>
 			<td></td>
 			<td></td>
@@ -518,38 +520,38 @@
 			<input type="checkbox" id="checkbox" align="right" checked onclick="disablefields();">
 			</td>
 			</tr>
-			
+
 			<tr>
 			<td>Date of Birth</td><td>:</td><td><input type="text" name="dob" placeholder="          DD-MM-YYYY"></td>
 			<td>WP / SP No.</td><td>:</td><td><input id="permitNo" type="text" name="permitNo" disabled="disabled"><br><br>
 			<input type="hidden" name="permitNo"></td>
 			</tr>
-			
+
 
 			<tr>
 			<td>Race</td><td>:</td><td><input type="text"  name="race"></td>
 			<td>WP / SP Expiry Date</td><td>:</td><td><input id="permitExpiry" type="text" name="permitExpiry" placeholder="          DD-MM-YYYY" required pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" title="Enter a date in this formart DD-MM-YYYY" disabled="disabled">
 			<input type="hidden" name="permitExpiry"></td>
-			
+
 			</tr>
-			
+
 			<tr>
 			<td>Contact No. (Home)</td><td>:</td><td><input type="text" name="homeContact"></td>
 			<td>Passport No.</td><td>:</td><td><input type="text" name="passportNo" >
-			
+
 			</tr>
-			
+
 			<tr>
 			<td>Handphone No.</td><td>:</td><td><input type="text" name="contact" required pattern="[0-9]+"></td>
 			<td>Passport Expiry</td><td>:</td><td><input type="text"  name="passportExpiry" placeholder="          DD-MM-YYYY" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" title="Enter a date in this formart DD-MM-YYYY">
 			</tr>
-			
+
 			<tr>
 			<td>Email</td><td>:</td><td><input type="email" name="email" pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" required title="Please input valid Email Address" ></td>
 			<td>Foreign Address</td><td>:</td><td><input id="faddress" type="text" name="faddress" style="height:50px; rows="2" cols="25" disabled="disabled"></td>
 			<input type="hidden" name="faddress">
 			</tr>
-			
+
 			<tr>
 			<td>Residential Address</td><td>:</td><td><input type="text" name="address"  style="height:50px; rows="2" cols="25" ></td>
 			<td>Department</td><td>:</td><td><select name="dept">
@@ -561,12 +563,12 @@
 				<option value="Autocad">Autocad</option>
 				</select></td>
 			</tr>
-			
+
 			<tr>
 			<td>Postal</td><td>:</td><td><input type="text" name="postal"></td>
 			<td>Designation</td><td>:</td><td><input type="text" name="designation"></td>
 			</tr>
-			
+
 			<tr>
 			<td>Resident Status</td><td>:</td><td><select name="resid">
 					<option selected></option>
@@ -576,7 +578,7 @@
 				</select></td>
 			<td>Joined Date</td><td>:</td><td><input type="text" placeholder="          DD-MM-YYYY" name="join"></td>
 			</tr>
-			
+
 			<tr>
 			<td></td><td></td><td></td>
 			<td>Employee Photo</td><td>:</td><td><input align="left" type="file" name="image" id="image" ></td>
@@ -586,20 +588,20 @@
 			<td></td>
 			<td></td><td></td><td></td><td></td>
 			<td align="right"><input type="submit" name="submit" value="Add"></td>
-			</tr>	
+			</tr>
 
 			<tr>
 			<td><br><br><br><br></td>
 			<td></td>
 			</tr>
-			
+
         </table>
     </form>
-</div>		
+</div>
 
 <div id="main">
 </div>
-    
+
 <footer id="footer">
 <a href="https://www.facebook.com/Invento-Engineers-Pte-Ltd-160632617407656/" target="_blank">
 <center><img src="facebook.png" alt="facebook"

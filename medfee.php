@@ -20,36 +20,36 @@
             document.myForm.empid.focus() ;
             return false;
          }
-		 
-		  
+
+
          if( document.myForm.name.value == "" )
          {
             alert( "Please enter Full Name!" );
             document.myForm.name.focus() ;
             return false;
          }
-		 
-		 
+
+
 		 if( document.myForm.entitlement.value == "")
           {
             alert( "Please enter Entitlement!" );
             document.myForm.entitlement.focus() ;
             return false;
-         }	
-		 
+         }
+
 		 if(document.myForm.date.value == "")
           {
             alert( "Please enter Date" );
             document.myForm.date.focus() ;
             return false;
          }
-		 
+
 		 if( document.myForm.clinic.value == "")
           {
             alert( "Please enter Clinic!" );
             document.myForm.clinic.focus() ;
             return false;
-         }		
+         }
 
 		 if( document.myForm.receiptno.value == "")
           {
@@ -112,15 +112,15 @@
 	$hospleave = "";
 	$medleave = "";
 	$remark = "";
-	
+
 function getEmployee()
-{	
+{
 	$employee = array();
 	$employee[0] = $_POST['empid'];
     $employee[1] = $_POST['fullname'];
 	    return $employee;
 }
-	
+
 // get values from the form
 function getPosts(){
 $posts = array();
@@ -147,17 +147,17 @@ $posts = array();
 if(isset($_POST['search']))
 {
     $employee = getEmployee();
-    
+
     $search_Query = "SELECT * FROM employees WHERE emp_id = '$employee[0]'";
-    
+
     $search_Result = mysqli_query($dbc, $search_Query);
-    
+
     if($search_Result)
     {
         if(mysqli_num_rows($search_Result))
         {
             while($row = mysqli_fetch_array($search_Result))
-            {				
+            {
 				$empid=$row['emp_id'];
 				$fullname=$row['emp_fullname'];
             }
@@ -177,7 +177,7 @@ if(isset($_POST['insert']))
     $data = getPosts();
 
 	//insert statement
-	$insert_Query=" INSERT INTO `medical` (`emp_id`, `emp_fullname`, `med_entitlement`, `med_date`, `med_clinic`, `med_days`, `med_paid`, `med_currency`, `med_rate`, `med_claimed`, `med_balance`, `med_remark`, `med_leave`, `hosp_leave`, `med_type`) VALUES ('$employee[0]', '$employee[1]', '$data[2]', '$data[3]', '$data[4]', '$data[5]', '$data[6]', '$data[7]', '$data[8]', '$data[9]', '$data[10]', '$data[11]','$data[12]','$data[13]','$data[14]')";  
+	$insert_Query=" INSERT INTO `medical` (`emp_id`, `emp_fullname`, `med_entitlement`, `med_date`, `med_clinic`, `med_days`, `med_paid`, `med_currency`, `med_rate`, `med_claimed`, `med_balance`, `med_remark`, `med_leave`, `hosp_leave`, `med_type`) VALUES ('$employee[0]', '$employee[1]', '$data[2]', '$data[3]', '$data[4]', '$data[5]', '$data[6]', '$data[7]', '$data[8]', '$data[9]', '$data[10]', '$data[11]','$data[12]','$data[13]','$data[14]')";
 	$insert_Result = mysqli_query($dbc, $insert_Query);
 
 
@@ -187,13 +187,13 @@ if(isset($_POST['insert']))
             if(mysqli_affected_rows($dbc) > 0)
             {
                 echo 'Data Inserted';
-				
+
             }else{
                 echo 'Data Not Inserted';
             }
-			
+
 		header("Location: displaymed.php");//redirect to claimDisplay.php page
-		mysqli_close( $dbc ) ;		
+		mysqli_close( $dbc ) ;
 		}
 }
 ?>
@@ -227,11 +227,13 @@ if(isset($_POST['insert']))
 			<li><a href="toolsfee.php">Add Tool Fee</a></li>
 			<li><a href="displayMed.php">View Medical Fee</a></li>
 			<li><a href="displayTool.php">View Tool Fee</a></li>
+			<li><a href="SAentitlement.php">Set Medical Entitlement</a></li>
+			<li><a href="SATools.php">Set Tool Entitlement</a></li>
           </ul>
 	<li class="leaves"><a href="http://www.justlogin.com" target="_blank">Leaves</a>
           <!--<ul>
             <li><a href="#">Manage</a></li>
-          </ul>-->	  
+          </ul>-->
 	<li class="career"><a href="careerDisplay.php">Career Applications</a>
 </ul>
 <br>
@@ -244,43 +246,43 @@ if(isset($_POST['insert']))
 			<td>Employee ID</td><td>:</td><td><input type="text" name="empid" maxlength="5" pattern="[A-Z]{3,5}" required title="Min.3, Max. 5 Capitial Letters ONLY!" value="<?php echo $empid;?>"><td><input type="submit" name="search" value="Find"></td></td>
 			<td>Amount Paid</td><td>:</td><td><input type="text"  name="paid"></td>
 			</tr>
-			
+
 			<tr>
 			<td>Full Name</td><td>:</td><td><input type="text" name="fullname" value="<?php echo $fullname;?>"></td>
 			<td></td>
 			<td>Exchange Rate</td><td>:</td><td><input type="text" name="rate"></td>
 			</tr>
-			
+
 			<tr>
 			<td>Entitlement</td><td>:</td><td><input type="text" name="entitlement"></td>
 			<td></td>
             <td>Amount Claimed (SGD)</td><td>:</td><td><input type="text" name="claimed" >
 			</tr>
-			
+
 			<tr>
 			<td>Date</td><td>:</td><td><input type="text" name="date" placeholder="DD-MMM-YYYY"></td>
 			<td></td>
 			<td>Amount Balance (SGD)</td><td>:</td><td><input type="text" name="balance"></td>
 			</tr>
-			
+
 			<tr>
 			<td>Hospital / Clinic</td><td>:</td><td><input type="text" name="clinic"></td>
 			<td></td>
 			<td>Balance Hospital Leave</td><td>:</td><td><input type="text" name="hospleave"></td>
 			</tr>
-			
+
 			<tr>
 			<td>Medical Type</td><td>:</td><td><select name="type">
 				<option selected></option>
 				<option value="Medical Leave">Medical Leave</option>
 				<option value="Outpatient Leave">Outpatient Leave</option>
 				<option value="Hospitalization Leave">Hospitalization Leave</option>
-				
+
 				</select></td>
 			<td></td>
 			<td>Balance Medical Leave</td><td>:</td><td><input type="text" name="medleave"></td>
 			</tr>
-			
+
 			<tr>
 			<td>Utilized (Days)</td><td>:</td><td><input type="text" name="days"></td>
 			<td></td>
@@ -295,12 +297,12 @@ if(isset($_POST['insert']))
 				</td>
 			<td></td>
 			</tr>
-			
+
 			<tr>
 			<td></td>
 			<td></td><td></td><td></td><td></td>
 			<td align="right"><input type="submit" name="insert" value="Add"></td>
-			</tr>	
+			</tr>
 
 			<tr>
 			<td><br><br><br></td>
@@ -308,10 +310,10 @@ if(isset($_POST['insert']))
 			</tr>
         </table>
     </form>
-</div>	
+</div>
 <div id="main">
 </div>
-    
+
 <footer id="footer">
 <a href="https://www.facebook.com/Invento-Engineers-Pte-Ltd-160632617407656/" target="_blank">
 <center><img src="facebook.png" alt="facebook"

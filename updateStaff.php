@@ -40,11 +40,13 @@
 			<li><a href="toolsfee.php">Add Tool Fee</a></li>
 			<li><a href="displayMed.php">View Medical Fee</a></li>
 			<li><a href="displayTool.php">View Tool Fee</a></li>
+			<li><a href="SAentitlement.php">Set Medical Entitlement</a></li>
+			<li><a href="SATools.php">Set Tool Entitlement</a></li>
           </ul>
 	<li class="leaves"><a href="http://www.justlogin.com" target="_blank">Leaves</a>
           <!--<ul>
             <li><a href="#">Manage</a></li>
-          </ul>-->	  
+          </ul>-->
 	<li class="career"><a href="careerDisplay.php">Career Applications</a>
 </ul>
 <br>
@@ -53,10 +55,10 @@
     //connect to database
     $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD,DB_NAME);
 
-	$sql="SELECT * FROM employees"; 
+	$sql="SELECT * FROM employees";
 
-		//$result = mysqli_query($dbc, $sql);	
-		
+		//$result = mysqli_query($dbc, $sql);
+
 	$emp_img = "";
 	$image = "";
 	$id = ""; //$id = null;
@@ -85,9 +87,9 @@
 	$emp_status = "";
 	$emp_pass = "";
 	//$emp_repass = "";
-				
+
 		function getPosts()
-		{	
+		{
 			$posts = array();
 			//$posts[0] = $_POST['image'];
 			//$posts[1] = $_POST['id'];
@@ -116,23 +118,23 @@
 			//$posts[25] = $_POST['status'];
 			//$posts[26] = $_POST['password'];
 			return $posts;
-		}		
-		
+		}
+
 		//Search employee..
 		if(isset($_POST['search']))
 		{
 			$data = getPosts();
-			
+
 			$search_Query = "SELECT * FROM employees WHERE emp_id = '$data[2]'"; //Search employee via their 3-5 letter employee ID.
-			
+
 			$search_Result = mysqli_query($dbc, $search_Query);
-			
+
 			if($search_Result)
-			{		
+			{
 				if(mysqli_num_rows($search_Result))
-				{	
-					while($row = mysqli_fetch_array($search_Result)) 
-					{    
+				{
+					while($row = mysqli_fetch_array($search_Result))
+					{
 					$id = $row['id'];
 					$emp_id = $row['emp_id'];
 					$emp_fullname = $row['emp_fullname'];
@@ -160,7 +162,7 @@
 					$emp_type = $row['emp_type'];
 					$emp_joined = $row['emp_joined'];
 					$emp_status = $row['emp_status'];
-					}	
+					}
 				}else{
 					echo 'No Data For This Employee ID';
 				}
@@ -198,39 +200,39 @@
 				$emp_faddress = $_POST['faddress'];
 				$emp_designation = $_POST['designation'];
 				//$emp_status = $_POST['status'];
-				
+
 		//Upload Image
 		$emp_img = basename($_FILES['image']['name']);
-				
+
 				$update = "UPDATE employees SET emp_fullname='$emp_fullname', emp_email='$emp_email', emp_contact='$emp_contact', emp_homeContact='$emp_homeContact', emp_dob='$emp_dob', emp_nric='$emp_nric', emp_fin='$emp_fin', emp_passportExpiry='$emp_passportExpiry', emp_passportNo='$emp_passportNo', emp_permitExpiry='$emp_permitExpiry', emp_permitNo='$emp_permitNo',  emp_nationality='$emp_nationality', emp_race='$emp_race', emp_resid='$emp_resid', emp_address='$emp_address', emp_postal='$emp_postal', emp_faddress='$emp_faddress', emp_dept='$emp_dept', emp_designation='$emp_designation', emp_type='$emp_type', emp_status='$emp_status', emp_joined='$emp_joined', emp_img='$emp_img' WHERE emp_id='$emp_id'";
-				
+
 			$update_Result = mysqli_query($dbc, $update);
-			
+
 			if (move_uploaded_file($_FILES['image']['tmp_name'], $emp_img)) {
 			$msg = "Image uploaded successfully";
 		}else{
 			$msg = "Failed to upload image";
 		}
-		
+
 		header("Location: adminDisplay.php");//redirect to adminUpdate.php page
-	
+
 	mysqli_close( $dbc ) ;
-			}	
+			}
 ?>
 
 <div id="form">
 <form action="updateStaff.php" method="post" enctype="multipart/form-data">
       <table border=0 width='97%'>
-	  
+
 			<!--<tr>
 			<td>ID :<?php echo $id;?></td>
 			<td></td>
 			</tr>-->
-			
+
 			<tr><br><br>
 			<td>Employee ID</td><td>:</td><td><input type="text" name="empid" maxlength="5" size="1" pattern="[A-Z]{3,5}" required title="Min.3, Max. 5 Capitial Letters ONLY! " value="<?php echo $emp_id;?>" ><input type="submit" name="search" value="Find"></td>
 			<td></td>
-			
+
 			</tr>
 			<tr>
 			<td>Full Name</td><td>:</td><td><input type="text" name="fullname" readonly="readonly" value="<?php echo $emp_fullname;?>"></td>
@@ -491,7 +493,7 @@
 			<td>FIN No.</td><td>:</td><td><input type="text" name="fin" value="<?php echo $emp_fin;?>" >
 			<input type="hidden" name="fin">
 			</tr>
-			
+
 			<tr>
 			<td>Date of Birth</td><td>:</td><td><input type="text" name="dob" placeholder="          DD-MM-YYYY" value="<?php echo $emp_dob;?>" ></td>
 			<td>WP / SP No.</td><td>:</td><td><input type="text" name="permitNo" value="<?php echo $emp_permitNo ;?>" ></td>
@@ -501,23 +503,23 @@
 			<td>Race</td><td>:</td><td><input type="text" name="race" value="<?php echo $emp_race ;?>"></td>
 			<td>WP / SP Expiry Date</td><td>:</td><td><input type="text" name="permitExpiry" placeholder="          DD-MM-YYYY" value="<?php echo $emp_permitExpiry ;?>" ></td>
 			</tr>
-			
+
 			<tr>
 			<td>Contact No. (Home)</td><td>:</td><td><input type="text" name="homeContact" value="<?php echo $emp_homeContact; ?>" ></td>
 			<td>Passport No.</td><td>:</td><td><input type="text" name="passportNo" value="<?php echo $emp_passportNo ;?>" >
-			</td>			
+			</td>
 			</tr>
-			
+
 			<tr>
 			<td>Handphone No.</td><td>:</td><td><input type="text" name="contact" value="<?php echo $emp_contact; ?>" ></td>
 			<td>Passport Expiry</td><td>:</td><td><input type="text" name="passportExpiry" placeholder="          DD-MM-YYYY" value="<?php echo $emp_passportExpiry; ?>">
 			</tr>
-			
+
 			<tr>
 			<td>Email</td><td>:</td><td><input type="text" name="email" value="<?php echo $emp_email;?>"></td>
 			<td>Foreign Address</td><td>:</td><td><input type="text" name="faddress" maxlength="100" size="30" style="height:50px; width:300px" rows="2" cols="25" value="<?php echo $emp_faddress;?>">
 			</tr>
-			
+
 			<tr>
 			<td>Residential Address</td><td>:</td><td><input type="text" name="address" maxlength="100" size="30" style="height:50px; width:300px" rows="2" cols="25" value="<?php echo $emp_address;?>"></td>
 			<td>Department</td><td>:</td><td><select name="dept">
@@ -529,12 +531,12 @@
 				<option value="Autocad">Autocad</option>
 				</select></td>
 			</tr>
-			
+
 			<tr>
 			<td>Postal</td><td>:</td><td><input type="text" name="postal" value="<?php echo $emp_postal; ?>"></td>
 			<td>Designation</td><td>:</td><td><input type="text" name="designation" value="<?php echo $emp_designation; ?>"></td>
 			</tr>
-			
+
 			<tr>
 			<td>Resident Status</td><td>:</td><td><select name="resid">
 					<option value="<?php echo $emp_resid; ?>"><?php echo $emp_resid; ?></option>
@@ -542,10 +544,10 @@
 					<option value="PR">PR</option>
 					<option value="Foreigner">Foreigner</option>
 				</select></td>
-				
+
 			<td>Joined Date</td><td>:</td><td><input type="text" name="joined" placeholder="          DD-MM-YYYY" value="<?php echo $emp_joined; ?>"></td>
 			</tr>
-			
+
 			<tr>
 			<td></td><td></td><td></td>
 			<td>Employee Photo</td><td>:</td><td><input align="left" type="file" name="image" id="image" ></td>
@@ -556,7 +558,7 @@
 			<td></td>
 			<td></td><td></td><td></td><td></td>
 			<td align="right"><input type="submit" name="update" value="Update"></td>
-			</tr>	
+			</tr>
 
 			<tr>
 			<td><br><br><br></td>

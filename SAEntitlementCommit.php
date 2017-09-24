@@ -1,9 +1,11 @@
+
 <?php
 	// Load the required files
 	require_once 'dbconfig.php';
 ?>
 <html>
 <head>
+<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script> <!-- jQuery source -->
 <title>Invento Engineering Pte Ltd</title>
 <link href="stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -18,6 +20,7 @@
 <a href="loginCust.php" style="color:black">Login As Customer</a> |
 <a href="register.php" style="color:black"> Register</a>-->
 </div>
+
 </div><div class="nav">
 <ul>
 	<li class="employee"><a href="admin.php">Profile</a>
@@ -38,7 +41,7 @@
 			<li><a href="toolsfee.php">Add Tool Fee</a></li>
 			<li><a href="displayMed.php">View Medical Fee</a></li>
 			<li><a href="displayTool.php">View Tool Fee</a></li>
-			<li><a href="SAentitlement.php">Set Medical Entitlement</a></li>
+      <li><a href="SAentitlement.php">Set Medical Entitlement</a></li>
 			<li><a href="SATools.php">Set Tool Entitlement</a></li>
           </ul>
 	<li class="leaves"><a href="http://www.justlogin.com" target="_blank">Leaves</a>
@@ -50,74 +53,23 @@
 <br>
 </div>
 <div id="container">
-<h1>Tool Fees</h1><br><br><br>
-<?php
+<br>
+<h1>Entitlement</h1><br><br><br>
+
+           <?php
+
     //connect to database
-    $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD,DB_NAME);
+    //$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD,DB_NAME);
 
-	$sql= "SELECT * FROM employees ORDER BY `emp_fullname`";
-
-	echo " <table cellpadding='4' bgcolor='#000000' style=color:#ffffff width='50%'>
-			<tr bgcolor='#8e1106'>
-			<th>Employee ID</th>
-            <th>Full Name</th>
-			<th>View Details</th>
-			</tr>";
-
-		$result = mysqli_query($dbc, $sql);
-
-        //while($row = mysql_fetch_array($result)) {
-		// mysql_fetch_array is deprecated, we need to use mysqli_fetch_array
-        while($row = mysqli_fetch_array($result)) {
+    if (isset($_POST['btnSend']))
+    {
+        $getmsg = $_POST['hidden_emp_fullname'];
+        echo $getmsg;
+    }
 ?>
 
-            <tr>
-			<td align='center' bgcolor='#ffffff' style=color:#000000 width='5%' ><?php echo $row["emp_id"];?></td>
-			<td bgcolor='#ffffff' style=color:#000000 width='50%' ><?php echo $row["emp_fullname"];?></td>
-			<!--<td><a href="employeeAdminView.php">View</a></td>-->
-			<td align='center' style='padding: 10px 0px 0px 0px;'  bgcolor='#ffffff' style=color:#000000 width='5%'>
-			<form method="post" action="displaytool2.php?id=<?php echo $row["emp_id"];?>">
-			<input type="submit" value="View" id="view_btn"></form></td>
-
-<?php
- echo "</tr>";
-			}
-			echo "</table>";
-				mysqli_query($dbc, $sql);
-	$empid = null;
-    $fullname = null;
-    $entitlement = null;
-	$prevbal = null;
-	$date = null;
-	$supplier = null;
-	$itemdesc = null;
-	$invoice = null;
-	$paid = null;
-	$gst = null;
-	$claimed = null;
-	$balance = null;
-
-
-
-			   if (isset($_POST['emp_id'])){
-
-      $id = $_POST['emp_id'];
-	  $sql = "DELETE FROM `employees` WHERE `emp_id` = '$id'";
-
-      $result = mysqli_query($dbc, $sql);
-            if (mysqli_query($dbc,$sql)){
-                echo "Employee deleted";
-            } else {
-                echo "Error deleting employee" . mysqli_error($dbc);
-            }
-            mysqli_close($dbc);
-			   echo "<meta http-equiv='refresh' content='0;url=displayMed.php'>";
-            }
-            ?>
-
-
-</br>
-</div>
+            </body>
+    </html>
 </div>
 <div id="main">
 </div>
